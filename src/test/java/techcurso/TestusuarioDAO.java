@@ -1,5 +1,7 @@
 package techcurso;
 
+import java.util.List;
+
 import br.com.techcurso.entidade.Usuario;
 import br.com.techcurso.persistencia.jdbc.UsuarioDao;
 
@@ -8,7 +10,7 @@ public class TestusuarioDAO {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		//testCadastrar();
-		testDeletar();
+		testBuscarTodos();
 	}
 	public static void testCadastrar() {
 		
@@ -41,6 +43,38 @@ public class TestusuarioDAO {
 		UsuarioDao usuDao = new UsuarioDao();
 		
 		usuDao.deletar(usu);
+	}
+	
+	public static void testSalvar() {
+		Usuario usu = new Usuario();
+		usu.setNome("Carminha Lucia Lima");
+		usu.setLogin("carminha_l");
+		usu.setSenha("123");
+		usu.setId(4);
+		UsuarioDao usuDao = new UsuarioDao();
+		
+		usuDao.salvar(usu);
+	}
+	public static void testBuscarId(int id) {
+		Usuario usu = new Usuario();
+		
+		UsuarioDao usuDao = new UsuarioDao();
+		usu = usuDao.buscaporid(id);
+		if (usu != null) {
+			System.out.println(usu);
+		} else {
+			System.out.println("usuário não encontrado");
+		}
+		
+	}
+	public static void testBuscarTodos() {
+		UsuarioDao usuDao = new UsuarioDao();
+		List<Usuario> usu = usuDao.buscaportodos();
+		
+		for (Usuario u: usu) {
+			System.out.println(u);
+		}
+		
 	}
 	
 }
