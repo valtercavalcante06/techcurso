@@ -126,5 +126,32 @@ public class UsuarioDao {
 		}
 		return lista_usuario;
 	}
-
+	public Usuario autenticar(Usuario usu) {
+		Connection con = ConectionFactory.getConnection();
+		String sql ="Select * from usuario where login=? and senha=?";
+		
+		
+		try (PreparedStatement preparador = con.prepareStatement(sql)) {
+					
+			preparador.setString(1, usu.getLogin());
+			preparador.setString(2, usu.getSenha());
+			
+			ResultSet resultado = preparador.executeQuery();
+			
+			if(resultado.next()) {
+				Usuario usuario = new Usuario();
+				
+				usuario.setId(resultado.getInt("id"));
+				usuario.setNome(resultado.getString("nome"));
+				usuario.setLogin(resultado.getString("login"));
+				usuario.setSenha(resultado.getString("senha"));
+				return usuario;
+			}			
+			
+			
+		} catch(SQLException e){
+			e.printStackTrace();		
+		}
+		return null;
+	}
 }

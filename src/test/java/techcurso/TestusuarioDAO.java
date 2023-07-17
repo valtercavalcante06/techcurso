@@ -10,7 +10,7 @@ public class TestusuarioDAO {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		//testCadastrar();
-		testBuscarTodos();
+		testAutenticar("joao","12345s");
 	}
 	public static void testCadastrar() {
 		
@@ -19,7 +19,7 @@ public class TestusuarioDAO {
 		
 		usu.setNome("Joao Lucas");
 		usu.setLogin("joao");
-		usu.setSenha("1235");
+		usu.setSenha("1235s");
 		//Inserindo as informações no banco
 		UsuarioDao usuDao = new UsuarioDao();
 		
@@ -75,6 +75,21 @@ public class TestusuarioDAO {
 			System.out.println(u);
 		}
 		
+	}
+	public static void testAutenticar(String login, String senha) {
+		UsuarioDao usuDao = new UsuarioDao();
+		
+		Usuario usu =  new Usuario();
+		
+		usu.setLogin(login);
+		usu.setSenha(senha);
+		
+		if (usuDao.autenticar(usu)==null) {
+			System.out.println("Usuário não encontrado");
+		}
+		else {
+			System.out.println("Usuário Autenticado");
+		}
 	}
 	
 }
